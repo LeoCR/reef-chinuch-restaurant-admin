@@ -22,8 +22,6 @@ export const addDrink=drink=>async dispatch=>{
     }).catch((err)=>{
         console.log("An error occurs in drinkActions.addDrink()");
         console.log(err);
-        
-        
     });
     dispatch({
         type:ADD_DRINK,

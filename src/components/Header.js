@@ -21,7 +21,7 @@ class Header extends Component{
                     </button>
                     <Link className="navbar-brand" to="/admin">React + Redux CRUD</Link>
                     </div>
-                    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <div className="collapse navbar-collapse"  style={{maxWidth: '800px',float: 'left'}}>
                         <ul className="nav navbar-nav">
                             {/* <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/main-courses" className="dropdown-toggle">Main Courses <span className="caret"></span>
@@ -71,8 +71,7 @@ class Header extends Component{
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/invoices" className="dropdown-toggle">Invoices <span className="caret"></span>
                                 </Link>
-                                
-                            </li>
+                            </li>*/}
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/users">Users <span className="caret"></span>
                                 </Link>
@@ -81,9 +80,10 @@ class Header extends Component{
                                         <Link to="/admin/add/user">Add</Link>
                                     </li>
                                 </ul>
-                            </li>*/}
+                            </li>
                         </ul>
                     </div>
+                    <a href="/logout" style={{float: 'right',color:' #fff',width:' 200px',position:' relative',lineHeight: 3}}>Logout</a>
                 </div>
             </nav>
         )

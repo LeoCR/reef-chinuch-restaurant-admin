@@ -6,7 +6,8 @@ const initialState = {
     ingredients:[],
     ingredientsByDish:[],
     modals:[],
-    drinks:[]
+    drinks:[],
+    users:[]
 };
 const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middleware),
