@@ -5,7 +5,8 @@ const middleware = [thunk];
 const initialState = {
     ingredients:[],
     ingredientsByDish:[],
-    modals:[]
+    modals:[],
+    drinks:[]
 };
 const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middleware),

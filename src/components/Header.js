@@ -59,7 +59,7 @@ class Header extends Component{
                                     </li>
                                 </ul>
                             </li>
-                            {/* <li className="dropdown" onClick={this.toggleSubmenu}>
+                            <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/drinks" className="dropdown-toggle">Drinks <span className="caret"></span>
                                 </Link>
                                 <ul className="dropdown-menu" role="menu">
@@ -67,7 +67,7 @@ class Header extends Component{
                                         <Link to="/admin/add/drink">Add</Link>
                                     </li>
                                 </ul>
-                            </li> 
+                            </li> {/* 
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/invoices" className="dropdown-toggle">Invoices <span className="caret"></span>
                                 </Link>
