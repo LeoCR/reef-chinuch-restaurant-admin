@@ -7,7 +7,8 @@ const initialState = {
     ingredientsByDish:[],
     modals:[],
     drinks:[],
-    users:[]
+    users:[],
+    mainCourses:[]
 };
 const store = createStore(rootReducer, initialState, compose(
     applyMiddleware(...middleware),

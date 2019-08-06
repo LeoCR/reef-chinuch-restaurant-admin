@@ -5,10 +5,12 @@ import drinksReducer from "./drinksReducer";
 import modalsReducer from "./modalsReducer";
 import ingredientByDishReducer from "./ingredientByDishReducer"
 import usersReducer from "./usersReducer";
+import mainCoursesReducer from "./mainCoursesReducer";
 export default combineReducers({
     ingredients:ingredientsReducer,
     drinks:drinksReducer,
     //invoices:invoicesReducer,
+    mainCourses:mainCoursesReducer,
     modals:modalsReducer,
     ingredientsByDish:ingredientByDishReducer,
     users:usersReducer

@@ -23,7 +23,7 @@ class Header extends Component{
                     </div>
                     <div className="collapse navbar-collapse"  style={{maxWidth: '800px',float: 'left'}}>
                         <ul className="nav navbar-nav">
-                            {/* <li className="dropdown" onClick={this.toggleSubmenu}>
+                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/main-courses" className="dropdown-toggle">Main Courses <span className="caret"></span>
                                 </Link>
                                 <ul className="dropdown-menu" role="menu">
@@ -32,6 +32,7 @@ class Header extends Component{
                                     </li>
                                 </ul>
                             </li>
+                            {/*
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/desserts" className="dropdown-toggle">Desserts <span className="caret"></span>
                                 </Link>
