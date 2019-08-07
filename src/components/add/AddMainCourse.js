@@ -113,7 +113,7 @@ class AddMainCourse extends Component{
                                 console.log(error);
                             }); 
                         });
-                }, 800);
+                },900);
              } 
             setTimeout(() => {
                 _this.props.getMainCourses();
@@ -162,6 +162,7 @@ class AddMainCourse extends Component{
         var totalOfItems=1, idString='',_this=this;
         _this.props.clearIngredientsByDish();
         var customRandomString=randomString(4);
+        this.props.getMainCourses();
         try {
             await api.get('/api/get/main-courses')
                 .then(response => {

@@ -50,8 +50,12 @@ export const showMainCourse=id=>async dispatch=>{
     })
 }
 
-export const editMainCourse=mainCourse=>async dispatch=>{
-    const response = await api.put(`/api/dish/update/${mainCourse.id}`,mainCourse)
+export const editMainCourse=(mainCourse,id)=>async dispatch=>{
+    const response = await api.put(`/api/dish/update/${id}`,mainCourse)
+    .then((res)=>{
+        console.log('Response mainCourseActions.editMainCourse');
+        console.log(res);
+    })
     .catch((err)=>{
         console.log('An error occurs in mainCourseActions.editMainCourse');
         console.log(err);
@@ -61,12 +65,17 @@ export const editMainCourse=mainCourse=>async dispatch=>{
         payload:response.data
     })
 }
-export const updateMainCourse=mainCourse=>async dispatch=>{
-    const response = await api.put(`/api/dish/update-img/${mainCourse.id}`,mainCourse,{
+export const updateMainCourse=(mainCourse,id)=>async dispatch=>{
+    const response = await api.put(`/api/dish/update-img/${id}`,mainCourse,{
         headers: {
             'content-type': 'multipart/form-data'
         }
-    }).catch((err)=>{
+    })
+    .then((res)=>{
+        console.log('Response mainCourseActions.updateMainCourse');
+        console.log(res);
+    })
+    .catch((err)=>{
         console.log('An error occurs in mainCourseActions.updateMainCourse');
         console.log(err);
     });

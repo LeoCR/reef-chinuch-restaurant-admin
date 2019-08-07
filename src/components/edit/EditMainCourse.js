@@ -35,6 +35,7 @@ class EditMainCourse extends Component{
     }
     componentDidMount=async()=>{
         const {id}=this.props.match.params;
+        this.props.getMainCourses();
         this.props.showMainCourse(id);
         this.props.setDishId(id);
         this.props.getIngredientsByDishId(id);
@@ -114,7 +115,7 @@ class EditMainCourse extends Component{
         } =this.state;
         var formData=new FormData(),
         _this=this;
-        if(name===''||price===''||description===''||category===''||subcategory===''){
+        if(name===''||price===''||description===''||category===''||subcategory===''||picture===''){
             this.setState({
                 error:true
             });
@@ -132,34 +133,37 @@ class EditMainCourse extends Component{
                 subcategory,
                 picture
             }
+            formData.append('id',id);
+            formData.append('name',name);
+            formData.append('price',price);
+            formData.append('description',description);
+            formData.append('picture',picture);
+            formData.append('category',category);
+            formData.append('subcategory',subcategory);
+           
             if(changedPicture===false){
-                this.props.editMainCourse(infoDish);
+                this.props.editMainCourse(infoDish,id);
             }
             else{
-                formData.append('id',id);
-                formData.append('name',name);
-                formData.append('price',price);
-                formData.append('description',description);
-                formData.append('picture',picture);
-                formData.append('category',category);
-                formData.append('subcategory',subcategory);
-                this.props.updateMainCourse(formData);
+                this.props.updateMainCourse(formData,id);
             }
             if(this.props.ingredientsByDish.length>0 ){
-                this.props.ingredientsByDish.forEach(function(ing) {
-                    api.post('/api/ingredient-to-dish/add/',ing)
-                    .then((res)=>{
-                        console.log(res);
-                    })
-                    .catch(function (error) {
-                        console.log(error);
+                setTimeout(() => {
+                    _this.props.ingredientsByDish.forEach(function(ing) {
+                        api.post('/api/ingredient-to-dish/add/',ing)
+                        .then((res)=>{
+                            console.log(res);
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     });
-                });
+                }, 900);
             }
-            this.props.getMainCourses();
             setTimeout(() => {
+                _this.props.getMainCourses();
                 _this.props.history.push('/admin/main-courses'); 
-            }, 900);
+            }, 1900);
         }
     }
     deleteIngredientDish=(e,ing)=>{
