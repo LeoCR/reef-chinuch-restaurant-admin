@@ -140,25 +140,22 @@ class EditMainCourse extends Component{
             formData.append('picture',picture);
             formData.append('category',category);
             formData.append('subcategory',subcategory);
-           
+            if(this.props.ingredientsByDish.length>0 ){
+                _this.props.ingredientsByDish.forEach(function(ing) {
+                    api.post('/api/ingredient-to-dish/add/',ing)
+                    .then((res)=>{
+                        console.log(res);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                });
+            }
             if(changedPicture===false){
                 this.props.editMainCourse(infoDish,id);
             }
             else{
                 this.props.updateMainCourse(formData,id);
-            }
-            if(this.props.ingredientsByDish.length>0 ){
-                setTimeout(() => {
-                    _this.props.ingredientsByDish.forEach(function(ing) {
-                        api.post('/api/ingredient-to-dish/add/',ing)
-                        .then((res)=>{
-                            console.log(res);
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                    });
-                }, 900);
             }
             setTimeout(() => {
                 _this.props.getMainCourses();
@@ -210,14 +207,13 @@ class EditMainCourse extends Component{
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Edit a Main Course</h2>
-                            <form encType="multipart/form-data" onSubmit={this.submitEditMainCourse} 
-                            id="form-strong-dish-update">
+                            <h2 className="text-center">Edit Main Course</h2>
+                            <form onSubmit={this.submitEditMainCourse} id="form-strong-dish-update" encType="multipart/form-data">
                                 <div className="form-group">
                                     <label>Name</label>
                                     <input type="text" defaultValue={this.state.id} 
                                     onChange={this.id} className="" style={{display:'none'}}
-                                     name="id"/>
+                                    name="id"/>
                                     <input type="text" defaultValue={name} onChange={this.nameDish} 
                                     className="form-control" placeholder="Name"
                                     name="name"
@@ -225,35 +221,35 @@ class EditMainCourse extends Component{
                                 </div>
                                 <div className="form-group">
                                     <label>Description</label>
-                                    <input type="text" defaultValue={description} 
+                                    <textarea type="text" 
+                                    value={description} 
                                     onChange={this.descriptionDish} className="form-control" 
                                     placeholder="Description"
-                                    name="description" 
-                                    />
+                                    name="description"></textarea>
                                 </div>
                                 <div className="form-group">
                                     <label>Picture</label>
                                     <input type="file" id="picture_upload" defaultValue={picture} 
                                     onChange={this.pictureDish} className="form-control-file"
-                                     placeholder="Picture" />
-                                     <img src={picture} style={{maxWidth:'400px'}} alt={name}/>
-                                <input type="text" defaultValue={picture} className="form-control-file"
+                                    placeholder="Picture" />
+                                    <img src={picture} style={{maxWidth:'400px'}} alt={name}/>
+                                    <input type="text" defaultValue={picture} className="form-control-file"
                                     readonly="readonly" name="picture" id="picture_hidden" style={{display:"none"}}/>
                                 </div>
                                 <div className="form-group">
                                     <label>Category</label>
                                     <input type="text" defaultValue={category} 
                                     onChange={this.categoryDish} className="form-control"
-                                     placeholder="Category" 
-                                     name="category"
+                                    placeholder="Category" 
+                                    name="category"
                                      />
                                 </div>
                                 <div className="form-group">
                                     <label>Subcategory</label>
                                     <input type="text" defaultValue={subcategory} 
                                     onChange={this.subcategoryDish} className="form-control"
-                                     placeholder="Subcategory" 
-                                     name="subcategory"
+                                    placeholder="Subcategory" 
+                                    name="subcategory"
                                      />
                                 </div>
                                 <div className="form-group">
@@ -261,8 +257,8 @@ class EditMainCourse extends Component{
                                     <input type="text" defaultValue={price} 
                                     onChange={this.priceDish} 
                                     className="form-control"
-                                     placeholder="Price" 
-                                     name="price"
+                                    placeholder="Price" 
+                                    name="price"
                                      />
                                 </div>
                             {this.getIngredientsByDish()}

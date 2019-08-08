@@ -5,16 +5,19 @@ import AddDrink from "../components/add/AddDrink";
 import AddUser from '../components/add/AddUser';
 import AddMainCourse from "../components/add/AddMainCourse";
 import AddDessert from "../components/add/AddDessert";
+import AddAppetizer from "../components/add/AddAppetizer";
 import ShowIngredients from "./show/ShowIngredients";
 import ShowDrinks from "./show/ShowDrinks";
 import ShowUsers from "./show/ShowUsers";
 import ShowDesserts from "./show/ShowDesserts";
 import ShowMainCourses from './show/ShowMainCourses';
+import ShowAppetizers from './show/ShowAppetizers';
 import EditIngredient from "../components/edit/EditIngredient";
 import EditDrink from "../components/edit/EditDrink";
 import EditUser from '../components/edit/EditUser';
 import EditDessert from "../components/edit/EditDessert";
 import EditMainCourse from '../components/edit/EditMainCourse';
+import EditAppetizer from '../components/edit/EditAppetizer';
 import {Router,Route,Switch} from "react-router-dom";
 import history from '../history';
 import Modal from "../components/Modal";
@@ -39,6 +42,11 @@ class App extends Component {
                       <Route exact path="/admin/main-courses/:page" component={ShowMainCourses}/>
                       <Route exact path="/admin/add/main-course" component={AddMainCourse}/>
                       <Route exact path="/admin/edit/main-course/:id" component={EditMainCourse}/>
+
+                      <Route exact path="/admin/appetizers" render={() => <ShowAppetizers/>}/>
+                      <Route exact path="/admin/appetizers/:page" component={ShowAppetizers}/>
+                      <Route exact path="/admin/add/appetizer" component={AddAppetizer}/>
+                      <Route exact path="/admin/edit/appetizer/:id" component={EditAppetizer}/> 
 
                       <Route exact path="/admin/drinks" render={() => <ShowDrinks/>}/>
                       <Route exact path="/admin/drinks/:page" component={ShowDrinks}/>

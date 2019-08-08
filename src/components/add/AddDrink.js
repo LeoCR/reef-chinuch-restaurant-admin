@@ -102,7 +102,7 @@ class AddDrink extends Component{
                     <div className="card">
                         <div className="card-body">
                             <h2 className="text-center">Add New Drink</h2>
-                            <form onSubmit={this.addNewDrink}>
+                            <form onSubmit={this.addNewDrink} encType="multipart/form-data">
                                 <div className="form-group">
                                     <label>Name</label>
                                     <input type="text" defaultValue={this.state.id} 
@@ -113,10 +113,10 @@ class AddDrink extends Component{
                                 </div>
                                 <div className="form-group">
                                     <label>Description</label>
-                                    <input type="text"
+                                    <textarea type="text"
                                         name="description"
                                      onChange={this.descriptionDish} className="form-control" 
-                                    placeholder="Description" />
+                                    placeholder="Description" ></textarea>
                                 </div>
                                 <div className="form-group">
                                     <label>Picture</label>

@@ -112,9 +112,8 @@ class EditDrink extends Component{
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Edit a Drink</h2>
-                            <form encType="multipart/form-data" onSubmit={this.editDrink} 
-                            id="form-drink-update">
+                            <h2 className="text-center">Edit Drink</h2>
+                            <form onSubmit={this.editDrink} id="form-drink-update"  encType="multipart/form-data">
                                 <div className="form-group">
                                     <label>Name</label>
                                     <input type="text" defaultValue={this.state.id} 
@@ -127,11 +126,10 @@ class EditDrink extends Component{
                                 </div>
                                 <div className="form-group">
                                     <label>Description</label>
-                                    <input type="text" defaultValue={description} 
+                                    <textarea type="text" value={description} 
                                     onChange={this.descriptionDrink} className="form-control" 
                                     placeholder="Description"
-                                    name="description" 
-                                    />
+                                    name="description"></textarea>
                                 </div>
                                 <div className="form-group">
                                     <label>Picture</label>

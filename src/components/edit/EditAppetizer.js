@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
-import {showDessert,editDessert,updateDessert,getDesserts} from "../../actions/dessertActions";
+import {showAppetizer,updateAppetizer,editAppetizer,getAppetizers} from "../../actions/appetizerActions";
 import {getIngredientsByDishId,deleteIngredientDish} from "../../actions/ingredientByDishActions";
 import {setDishId,setAddIngredient,setNextIdDishIngredient} from '../../actions/modalActions';
 import {openModal} from '../../helper/modal.helper';
 import api from '../../api/api';
-class EditDessert extends Component{
+class EditAppetizer extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -13,9 +13,9 @@ class EditDessert extends Component{
             name:'',
             description:'',
             picture:'',
-            price:'',
-            category:'Dessert',
+            category:'Appetizer',
             subcategory:'',
+            price:'',
             error:false,
             changedPicture:false,
             ingredientsByDish:[]
@@ -30,13 +30,13 @@ class EditDessert extends Component{
     }
     id=(e)=>{
         this.setState({
-            id:e.target.value
+            name:e.target.value
         });
     }
     componentDidMount=async()=>{
         const {id}=this.props.match.params;
-        this.props.getDesserts();
-        this.props.showDessert(id);
+        this.props.getAppetizers();
+        this.props.showAppetizer(id);
         this.props.setDishId(id);
         this.props.getIngredientsByDishId(id);
         var _this=this;
@@ -54,64 +54,55 @@ class EditDessert extends Component{
                 ingredientsByDish:nextProps.ingredientsByDish
             })
         }
-        if(nextProps.dessert){
-            const {id, name,price,description,picture,category,subcategory}=nextProps.dessert;
+        if(nextProps.appetizer){
+            const {id, name,price,description,category,subcategory,picture}=nextProps.appetizer;
             this.setState({
                 id,
                 name,
                 description,
-                picture,
-                price,
                 category,
-                subcategory
+                subcategory,
+                picture,
+                price
             })
         }
     }
-    nameDessert=(e)=>{
+    nameAppetizer=(e)=>{
         this.setState({
             name:e.target.value
         });
     }
-    descriptionDessert=(e)=>{
+    descriptionAppetizer=(e)=>{
         this.setState({
             description:e.target.value
         });
     }
-    pictureDessert=(e)=>{
+    pictureAppetizer=(e)=>{
         if(e.target.files[0]!==null){
             this.setState({
                 picture:e.target.files[0],
                 changedPicture:true
-            }); 
-        } 
+            });
+        }
     }
-    priceDessert=(e)=>{
-        this.setState({
-            price:e.target.value
-        });
-    }
-    categoryDish=(e)=>{
+    categoryAppetizer=(e)=>{
         this.setState({
             category:e.target.value
         });
     }
-    subcategoryDish=(e)=>{
+    subcategoryAppetizer=(e)=>{
         this.setState({
             subcategory:e.target.value
         });
     }
-    editDessert=(e)=>{   
-        e.preventDefault(); 
-        const {
-            id ,
-            name,
-            description,
-            price,
-            picture,
-            category,
-            subcategory,
-            changedPicture
-        } =this.state;
+    priceAppetizer=(e)=>{
+        this.setState({
+            price:e.target.value
+        });
+    }
+    submitEditAppetizer=(e)=>{
+        e.preventDefault();
+        const {id ,name,description,price,category,subcategory,picture,changedPicture} =this.state;
         var formData=new FormData(),
         _this=this;
         if(name===''||price===''||description===''||category===''||subcategory===''){
@@ -123,22 +114,14 @@ class EditDessert extends Component{
             this.setState({
                 error:false
             });
-            const infoDessert={
-                id,
-                name,
-                price,
-                description,
-                picture,
-                category,
-                subcategory
-            }
+            const infoAppetizer={id,name,price,description,category,picture,subcategory}
             formData.append('id',id);
             formData.append('name',name);
             formData.append('price',price);
             formData.append('description',description);
+            formData.append('picture',picture);
             formData.append('category',category);
             formData.append('subcategory',subcategory);
-            formData.append('picture',picture);
             if(_this.props.ingredientsByDish.length>0 ){
                 _this.props.ingredientsByDish.forEach(function(ing) {
                     api.post('/api/ingredient-to-dish/add/',ing)
@@ -151,15 +134,15 @@ class EditDessert extends Component{
                 });
             }
             if(changedPicture===false){
-                this.props.editDessert(infoDessert,id);
+                this.props.editAppetizer(infoAppetizer,id);
             }
             else{
-                this.props.updateDessert(formData,id);
+                this.props.updateAppetizer(formData,id);
             }
             setTimeout(() => {
-                _this.props.getDesserts();
-                _this.props.history.push('/admin/desserts/');
-            }, 1900);
+                _this.props.getAppetizers();
+                _this.props.history.push('/admin/appetizers/');
+            },1900);
         }
     }
     deleteIngredientDish=(e,ing)=>{
@@ -200,57 +183,62 @@ class EditDessert extends Component{
             }    
     }
     render(){
-        const {name,price,description,picture,category,subcategory,error} = this.state;
+        const {name,price,description,category,subcategory,picture,error} = this.state;
         return(
             <div className="row justify-content-center mt-5">
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Edit Dessert</h2>
-                            <form onSubmit={this.editDessert} id="form-dessert-update" encType="multipart/form-data">
+                            <h2 className="text-center">Edit Appetizer</h2>
+                            <form onSubmit={this.submitEditAppetizer} id="form-Appetizer-update" encType="multipart/form-data">
                                 <div className="form-group">
                                     <label>Name</label>
                                     <input type="text" defaultValue={this.state.id} 
                                     onChange={this.id} className="" style={{display:'none'}}
                                      name="id"/>
-                                    <input type="text" defaultValue={name} onChange={this.nameDessert} 
+                                    <input type="text" defaultValue={name} onChange={this.nameAppetizer} 
                                     className="form-control" placeholder="Name"
                                     name="name"
                                      />
                                 </div>
                                 <div className="form-group">
-                                    <label>Description</label>
-                                    <textarea type="text" value={description} 
-                                    onChange={this.descriptionDessert} className="form-control" 
-                                    placeholder="Description"
-                                    name="description" ></textarea>
+                                    <label style={{width:'100%'}}>Description</label> 
+                                    <textarea  value={description} className="form-control"
+                                    onChange={this.descriptionAppetizer} ></textarea>
                                 </div>
                                 <div className="form-group">
                                     <label>Picture</label>
                                     <input type="file" id="picture_upload" defaultValue={picture} 
-                                    onChange={this.pictureDessert} className="form-control-file" placeholder="Picture" />
+                                    onChange={this.pictureAppetizer} className="form-control-file"
+                                    placeholder="Picture" />
                                     <img src={picture} style={{maxWidth:'400px'}} alt={name}/>
-                                    <input type="text" defaultValue={picture} className="form-control-file" 
-                                    readonly="readonly" name="picture" id="picture_hidden" style={{display:"none"}}/>
-                                </div>
-                                <div className="form-group">
-                                    <label>Price</label>
-                                    <input type="text" defaultValue={price}  onChange={this.priceDessert} 
-                                     className="form-control" placeholder="Price" name="price" />
+                                    <input type="text" defaultValue={picture} className="form-control-file"
+                                    readOnly="readOnly" name="picture" id="picture_hidden" style={{display:"none"}}/>
                                 </div>
                                 <div className="form-group">
                                     <label>Category</label>
-                                    <input type="text" onChange={this.categoryDish} 
-                                    className="form-control"
-                                    name="category" defaultValue={category}
-                                     placeholder="Category" readOnly/>
+                                    <input type="text" defaultValue={category} 
+                                    onChange={this.categoryAppetizer} className="form-control"
+                                    placeholder="Category" 
+                                    name="category"
+                                    />
                                 </div>
                                 <div className="form-group">
                                     <label>Subcategory</label>
-                                    <input type="text" onChange={this.subcategoryDish} 
+                                    <input type="text" defaultValue={subcategory} 
+                                    onChange={this.subcategoryAppetizer} className="form-control"
+                                    placeholder="Subcategory" 
+                                    name="subcategory"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label>Price</label>
+                                    <input type="text" defaultValue={price} 
+                                    onChange={this.priceAppetizer} 
                                     className="form-control"
-                                    name="subcategory" defaultValue={subcategory}
-                                     placeholder="Subcategory" />
+                                    placeholder="Price" 
+                                    name="price"
+                                    />
                                 </div>
                             {this.getIngredientsByDish()}
                             {error ? 
@@ -269,10 +257,10 @@ class EditDessert extends Component{
     }
 }
 const mapStateToProps=state=>({
-    dessert:state.desserts.dessert,
-    desserts:state.desserts.desserts,
+    appetizer:state.appetizers.appetizer,
+    appetizers:state.appetizers.appetizers,
     ingredientsByDish:state.ingredientsByDish.ingredientsByDish,
     idDish:state.modals.idDish,
     nextIdDishIngredient:state.modals.nextIdDishIngredient
 })
-export default connect(mapStateToProps,{deleteIngredientDish,setNextIdDishIngredient,setDishId,setAddIngredient,getIngredientsByDishId,showDessert,editDessert,updateDessert,getDesserts})(EditDessert);
+export default connect(mapStateToProps,{deleteIngredientDish,setNextIdDishIngredient,setDishId,setAddIngredient,getIngredientsByDishId,showAppetizer,updateAppetizer,editAppetizer,getAppetizers})(EditAppetizer);

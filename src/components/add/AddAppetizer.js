@@ -1,12 +1,12 @@
 import React,{Component} from 'react';
 import api from "../../api/api";
 import {connect} from "react-redux";
-import {addDessert,getDesserts} from "../../actions/dessertActions";
+import {addAppetizer,getAppetizers} from "../../actions/appetizerActions";
 import {deleteIngredientDish,clearIngredientsByDish} from "../../actions/ingredientByDishActions";
 import {setDishId,setAddIngredient,setNextIdDishIngredient} from '../../actions/modalActions';
 import {openModal} from '../../helper/modal.helper';
 import {randomString} from '../../helper/randomString.helper';
-class AddDessert extends Component{
+class AddAppetizer extends Component{
     constructor(props){
         super(props);
         this.state={
@@ -14,7 +14,7 @@ class AddDessert extends Component{
             name:'',
             description:'',
             picture:'',
-            category:'Dessert',
+            category:'Appetizer',
             subcategory:'',
             price:'',
             error:false,
@@ -33,17 +33,17 @@ class AddDessert extends Component{
             id:e.target.value
         });
     }
-    nameDessert=(e)=>{
+    nameDish=(e)=>{
         this.setState({
             name:e.target.value
         });
     }
-    descriptionDessert=(e)=>{
+    descriptionDish=(e)=>{
         this.setState({
             description:e.target.value
         });
     }
-    pictureDessert=(e)=>{
+    pictureDish=(e)=>{
         if(e.target.files[0]!==null ||e.target.files[0]!==undefined){
             this.setState({
                 picture:e.target.files[0]
@@ -60,7 +60,7 @@ class AddDessert extends Component{
             subcategory:e.target.value
         });
     }
-    priceDessert=(e)=>{
+    priceDish=(e)=>{
         this.setState({
             price:e.target.value
         });
@@ -70,20 +70,20 @@ class AddDessert extends Component{
           this.setState({ ingredientsByDish: nextProps.ingredientsByDish });
         }
     }
-    addNewDessert=(e)=>{
+    addNewAppetizer=(e)=>{
         e.preventDefault();
         const {
             id ,
             name,
             description,
             price,
-            picture,
             category,
-            subcategory
+            subcategory,
+            picture
         } =this.state;
         var formData = new FormData(),
         _this=this;
-        if(name===''||price===''||description===''||picture===''||category===''||subcategory===''){
+        if(name===''||price===''||description===''||category===''||picture===''||subcategory===''){
             this.setState({
                 error:true
             });
@@ -96,10 +96,10 @@ class AddDessert extends Component{
             formData.append('name',name);
             formData.append('price',price);
             formData.append('description',description);
-            formData.append('picture',picture);
+            formData.append('picture',picture)
             formData.append('category',category);
-            formData.append('subcategory',subcategory);
-            this.props.addDessert(formData);
+            formData.append('subcategory',category);
+            this.props.addAppetizer(formData);
             if(typeof this.props.ingredientsByDish!=='undefined' && this.props.ingredientsByDish.length > 0){
                 setTimeout(() => {
                         _this.props.ingredientsByDish.forEach(function(ing) {
@@ -109,14 +109,14 @@ class AddDessert extends Component{
                             })
                             .catch(function (error) {
                                 console.log(error);
-                            }); 
+                            });
                         });
-                }, 900);
+                },900);
             }
-             setTimeout(() => {
-                _this.props.getDesserts();
-                _this.props.history.push('/admin/desserts'); 
-            }, 1900); 
+            setTimeout(() => {
+                _this.props.getAppetizers();
+                _this.props.history.push('/admin/appetizers'); 
+            }, 1900);
         }  
     }
     deleteIngredientDish=(e,ing)=>{
@@ -157,18 +157,16 @@ class AddDessert extends Component{
         }  
     }
     componentDidMount=async()=>{
-        var totalOfItems=1,
-        idString='',
-        _this=this;
+        var totalOfItems=1;var idString,_this=this;
         _this.props.clearIngredientsByDish();
         var customRandomString=randomString(4);
-        await api.get('/api/get/desserts')
+        await api.get('/api/get/appetizers')
             .then(response => {
-                for(var i = 0; i <= response.data.length; ++i){
+                for(var i = 0; i <=response.data.length; ++i){
                     ++totalOfItems;
                 }
             }).then(()=>{
-                idString=totalOfItems+1+'ADDEDDESRT_'+customRandomString;//console.log(idString); 
+                idString=totalOfItems+1+'ADDEDENTR_'+customRandomString;//console.log(idString); 
             })
             .catch(error => {
                 console.log(error);
@@ -181,7 +179,7 @@ class AddDessert extends Component{
             }
         })
         setTimeout(() => {
-            this.setState({
+            _this.setState({
                 id:idString
             });
             _this.props.setDishId(idString);
@@ -189,57 +187,55 @@ class AddDessert extends Component{
         }, 300);
     }
     render(){
-        const {error} = this.state;
+        const {error,category} = this.state;
         return(
             <div className="row justify-content-center mt-5">
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
-                            <h2 className="text-center">Add New Dessert</h2>
-                            <form onSubmit={this.addNewDessert} encType="multipart/form-data">
+                            <h2 className="text-center">Add New Appetizer</h2>
+                            <form onSubmit={this.addNewAppetizer} encType="multipart/form-data">
                                 <div className="form-group">
                                     <label>Name</label>
                                     <input type="text" defaultValue={this.state.id} 
                                     onChange={this.id} className="" style={{display:'none'}}
-                                    name="id"/>
-                                    <input type="text" onChange={this.nameDessert} name="name"
-                                    className="form-control" placeholder="Name" />
+                                     name="id"/>
+                                    <input type="text" onChange={this.nameDish} name="name"
+                                     className="form-control" placeholder="Name" />
                                 </div>
                                 <div className="form-group">
                                     <label>Description</label>
                                     <textarea type="text"
-                                    name="description"
-                                    onChange={this.descriptionDessert} className="form-control" 
-                                    placeholder="Description"></textarea>
+                                        name="description"
+                                     onChange={this.descriptionDish} className="form-control" 
+                                    placeholder="Description" ></textarea>
                                 </div>
                                 <div className="form-group">
                                     <label>Picture</label>
-                                    <input type="file" onChange={this.pictureDessert} 
+                                    <input type="file" onChange={this.pictureDish} 
                                     className="form-control-file" 
                                     placeholder="Picture" name="picture"/>
-                                </div>
-                                
-                                <div className="form-group">
-                                    <label>Price</label>
-                                    <input type="text" onChange={this.priceDessert} 
-                                    className="form-control" 
-                                    name="price"
-                                    placeholder="Price" />
                                 </div>
                                 <div className="form-group">
                                     <label>Category</label>
                                     <input type="text" onChange={this.categoryDish} 
-                                    defaultValue="Dessert"
                                     className="form-control"
                                     name="category"
-                                    placeholder="Category" readOnly/>
+                                     placeholder="Category" readOnly defaultValue={category}/>
                                 </div>
                                 <div className="form-group">
                                     <label>Subcategory</label>
                                     <input type="text" onChange={this.subcategoryDish} 
                                     className="form-control"
                                     name="subcategory"
-                                    placeholder="Subcategory" />
+                                     placeholder="Subcategory" />
+                                </div>
+                                <div className="form-group">
+                                    <label>Price</label>
+                                    <input type="text" onChange={this.priceDish} 
+                                    className="form-control" 
+                                    name="price"
+                                    placeholder="Price" />
                                 </div>
                             {this.getIngredientsByDishId()}
                             {error ? 
@@ -250,6 +246,7 @@ class AddDessert extends Component{
                             }
                                 <button type="submit" className="btn btn-primary font-weight-bold text-uppercase d-block w-100">Add</button>
                             </form>
+                            
                         </div>
                     </div>
                 </div>
@@ -258,9 +255,9 @@ class AddDessert extends Component{
     }
 }
 const mapStateToProps=state=>({
-    desserts:state.desserts.desserts,
+    appetizers:state.appetizers.appetizers,
     ingredientsByDish:state.ingredientsByDish.ingredientsByDish,
     idDish:state.modals.idDish,
     nextIdDishIngredient:state.modals.nextIdDishIngredient
 })
-export default connect(mapStateToProps,{clearIngredientsByDish,deleteIngredientDish,setNextIdDishIngredient,setDishId,setAddIngredient,addDessert,getDesserts})(AddDessert);
+export default connect(mapStateToProps,{clearIngredientsByDish,deleteIngredientDish,setNextIdDishIngredient,setDishId,setAddIngredient,addAppetizer,getAppetizers})(AddAppetizer);

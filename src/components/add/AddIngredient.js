@@ -87,7 +87,7 @@ class AddIngredient extends React.Component{
                     <div className="card">
                         <div className="card-body">
                             <h2 className="text-center">Add New Ingredient</h2>
-                            <form onSubmit={this.addNewIngredient}>
+                            <form onSubmit={this.addNewIngredient} encType="multipart/form-data">
                                 <div className="form-group">
                                     <label>Name</label>
                                     <input type="text" defaultValue={this.state.id} 
