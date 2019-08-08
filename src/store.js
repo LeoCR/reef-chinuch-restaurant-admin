@@ -8,6 +8,7 @@ const initialState = {
     modals:[],
     drinks:[],
     users:[],
+    desserts:[],
     mainCourses:[]
 };
 const store = createStore(rootReducer, initialState, compose(

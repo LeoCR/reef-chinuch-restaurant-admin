@@ -88,3 +88,8 @@ table th,table td,.table > thead > tr > th{
   font-size: 24px;
   float: left;
 }
+.font-weight-bold.alert-danger.text-center.mt-4{
+  position: relative;
+  float: left;
+  width: 100%;
+}

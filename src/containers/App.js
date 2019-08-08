@@ -4,13 +4,16 @@ import AddIngredient from "../components/add/AddIngredient";
 import AddDrink from "../components/add/AddDrink";
 import AddUser from '../components/add/AddUser';
 import AddMainCourse from "../components/add/AddMainCourse";
+import AddDessert from "../components/add/AddDessert";
 import ShowIngredients from "./show/ShowIngredients";
 import ShowDrinks from "./show/ShowDrinks";
 import ShowUsers from "./show/ShowUsers";
+import ShowDesserts from "./show/ShowDesserts";
 import ShowMainCourses from './show/ShowMainCourses';
 import EditIngredient from "../components/edit/EditIngredient";
 import EditDrink from "../components/edit/EditDrink";
 import EditUser from '../components/edit/EditUser';
+import EditDessert from "../components/edit/EditDessert";
 import EditMainCourse from '../components/edit/EditMainCourse';
 import {Router,Route,Switch} from "react-router-dom";
 import history from '../history';
@@ -25,7 +28,7 @@ class App extends Component {
                 <div className="container">
                   <Switch>
                       <Route exact path="/admin/" 
-                      render={() => <ShowIngredients/>}
+                      render={() => <ShowMainCourses/>}
                       />
                       <Route exact path="/admin/ingredients" render={() => <ShowIngredients/>} />
                       <Route exact path="/admin/ingredients/:page" component={ShowIngredients} />
@@ -41,6 +44,11 @@ class App extends Component {
                       <Route exact path="/admin/drinks/:page" component={ShowDrinks}/>
                       <Route exact path="/admin/add/drink" component={AddDrink}/>
                       <Route exact path="/admin/edit/drink/:id" component={EditDrink}/>
+
+                      <Route exact path="/admin/desserts" render={() => <ShowDesserts/>}/>
+                      <Route exact path="/admin/desserts/:page" component={ShowDesserts}/>
+                      <Route exact path="/admin/add/dessert" component={AddDessert}/>
+                      <Route exact path="/admin/edit/dessert/:id" component={EditDessert}/>
 
                       <Route exact path="/admin/users" component={ShowUsers}/>
                       <Route exact path="/admin/users/:page" component={ShowUsers}/>

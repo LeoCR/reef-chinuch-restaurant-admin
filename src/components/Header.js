@@ -32,7 +32,6 @@ class Header extends Component{
                                     </li>
                                 </ul>
                             </li>
-                            {/*
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/desserts" className="dropdown-toggle">Desserts <span className="caret"></span>
                                 </Link>
@@ -41,7 +40,7 @@ class Header extends Component{
                                         <Link to="/admin/add/dessert">Add</Link>
                                     </li>
                                 </ul> 
-                            </li>
+                            </li>{/*
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/appetizers" className="dropdown-toggle">Appetizers <span className="caret"></span>
                                 </Link>
