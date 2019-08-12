@@ -166,7 +166,7 @@ class AddAppetizer extends Component{
                     ++totalOfItems;
                 }
             }).then(()=>{
-                idString=totalOfItems+1+'ADDEDENTR_'+customRandomString;//console.log(idString); 
+                idString=totalOfItems+1+'ADDEDAPPTZR_'+customRandomString;//console.log(idString); 
             })
             .catch(error => {
                 console.log(error);

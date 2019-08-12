@@ -66,7 +66,7 @@ class AddIngredient extends React.Component{
                         ++totalOfItems;
                 }
             }).then(()=>{
-                idString=totalOfItems+1+'ADDING';//console.log(idString); 
+                idString=totalOfItems+1+'ADDEDING';//console.log(idString); 
             })
             .catch(error => {
                 console.log(error);

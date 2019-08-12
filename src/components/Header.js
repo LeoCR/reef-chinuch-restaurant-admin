@@ -19,7 +19,6 @@ class Header extends Component{
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <Link className="navbar-brand" to="/admin">React + Redux CRUD</Link>
                     </div>
                     <div className="collapse navbar-collapse"  style={{maxWidth: '800px',float: 'left'}}>
                         <ul className="nav navbar-nav">

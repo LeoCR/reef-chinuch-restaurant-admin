@@ -21,9 +21,8 @@ class AddUser extends React.Component{
         var idUser=0,totalOfItems=0,_this=this;
         await api.get('/api/count-users')
             .then(response => {
-                totalOfItems=response.data.MaxIdUser;
+                totalOfItems=response.data.maxiduser;
                 console.log(totalOfItems);
-                
             }).then(()=>{
                 idUser=parseInt(totalOfItems)+1;//console.log(idString); 
             })
