@@ -66,11 +66,11 @@ class Header extends Component{
                                         <Link to="/admin/add/drink">Add</Link>
                                     </li>
                                 </ul>
-                            </li> {/* 
+                            </li> 
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/invoices" className="dropdown-toggle">Invoices <span className="caret"></span>
                                 </Link>
-                            </li>*/}
+                            </li>
                             <li className="dropdown" onClick={this.toggleSubmenu}>
                                 <Link to="/admin/users">Users <span className="caret"></span>
                                 </Link>

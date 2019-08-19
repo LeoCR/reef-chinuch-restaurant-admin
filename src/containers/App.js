@@ -12,12 +12,14 @@ import ShowUsers from "./show/ShowUsers";
 import ShowDesserts from "./show/ShowDesserts";
 import ShowMainCourses from './show/ShowMainCourses';
 import ShowAppetizers from './show/ShowAppetizers';
+import ShowInvoices from './show/ShowInvoices';
 import EditIngredient from "../components/edit/EditIngredient";
 import EditDrink from "../components/edit/EditDrink";
 import EditUser from '../components/edit/EditUser';
 import EditDessert from "../components/edit/EditDessert";
 import EditMainCourse from '../components/edit/EditMainCourse';
 import EditAppetizer from '../components/edit/EditAppetizer';
+import EditInvoice from '../components/edit/EditInvoice';
 import {Router,Route,Switch} from "react-router-dom";
 import history from '../history';
 import Modal from "../components/Modal";
@@ -62,6 +64,10 @@ class App extends Component {
                       <Route exact path="/admin/users/:page" component={ShowUsers}/>
                       <Route exact path="/admin/edit/user/:id" component={EditUser}/>
                       <Route exact path="/admin/add/user" component={AddUser}/>
+
+                      <Route exact path="/admin/invoices" component={ShowInvoices}/>
+                      <Route exact path="/admin/invoices/:page" component={ShowInvoices}/>
+                      <Route exact path="/admin/edit/invoice/:order_code" component={EditInvoice}/>
                   </Switch>  
                 </div>
             </React.Fragment>

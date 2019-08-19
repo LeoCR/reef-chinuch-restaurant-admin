@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
 import ingredientsReducer from "./ingredientsReducer";
 import drinksReducer from "./drinksReducer";
-//import invoicesReducer from "./invoicesReducer";
+import invoicesReducer from "./invoicesReducer";
 import dessertsReducer from "./dessertsReducer";
 import modalsReducer from "./modalsReducer";
 import ingredientByDishReducer from "./ingredientByDishReducer"
@@ -11,7 +11,7 @@ import appetizersReducer from "./appetizersReducer";
 export default combineReducers({
     ingredients:ingredientsReducer,
     drinks:drinksReducer,
-    //invoices:invoicesReducer,
+    invoices:invoicesReducer,
     appetizers:appetizersReducer,
     desserts:dessertsReducer,
     mainCourses:mainCoursesReducer,

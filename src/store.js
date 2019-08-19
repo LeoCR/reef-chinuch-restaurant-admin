@@ -9,6 +9,7 @@ const initialState = {
     drinks:[],
     users:[],
     desserts:[],
+    invoices:[],
     mainCourses:[],
     appetizers:[]
 };
