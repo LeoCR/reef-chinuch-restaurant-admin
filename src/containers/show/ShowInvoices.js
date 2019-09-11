@@ -153,7 +153,6 @@ class ShowInvoices extends React.Component{
         var tempInvoicesToShow=[];
         var maxItemsLenght=parseInt(this.state.maxItemsPerPage*this.state.currentPage);
         var _this=this;
-        
         try {
             let index = this.state.firstItemToShow;
             if(maxItemsLenght>invoices.length){
@@ -175,8 +174,6 @@ class ShowInvoices extends React.Component{
             console.error(error);
         }
     }
-    
-    
     getPagination=()=>{
         return(
             <React.Fragment>
@@ -202,7 +199,6 @@ class ShowInvoices extends React.Component{
             </React.Fragment>
         )
     }
-    
     render(){
         const {invoices}=this.props;
         if(!invoices){
@@ -216,9 +212,8 @@ class ShowInvoices extends React.Component{
             <React.Fragment>
                 <ul>
                     {this.renderInvoices()}
-                    {this.getPagination()}
                 </ul>
-                
+                {this.getPagination()}
             </React.Fragment>
         )
     }

@@ -23,6 +23,10 @@ import EditInvoice from '../components/edit/EditInvoice';
 import {Router,Route,Switch} from "react-router-dom";
 import history from '../history';
 import Modal from "../components/Modal";
+import Documentation from '../components/documentation/Documentation';
+import UseCaseDiagram from '../components/documentation/UseCaseDiagram';
+import EntityRelationship from '../components/documentation/EntityRelationship';
+import Footer from '../components/Footer';
 class App extends Component {
   render() {
     return (
@@ -68,8 +72,13 @@ class App extends Component {
                       <Route exact path="/admin/invoices" component={ShowInvoices}/>
                       <Route exact path="/admin/invoices/:page" component={ShowInvoices}/>
                       <Route exact path="/admin/edit/invoice/:order_code" component={EditInvoice}/>
+
+                      <Route exact path="/admin/documentation" component={Documentation}/>
+                      <Route exact path="/admin/documentation/use-case-diagram" component={UseCaseDiagram}/>
+                      <Route exact path="/admin/documentation/entity-relationship-diagram" component={EntityRelationship}/>
                   </Switch>  
                 </div>
+                <Footer/>
             </React.Fragment>
           </Router>
           <Modal/>
